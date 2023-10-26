@@ -14,18 +14,19 @@ import {
 import Navigation from "./components/Navigation";
 import ProjectView from "./components/ProjectView";
 import CreateProjectView from "./components/CreateProjectView";
+import { useNavigation } from "./hooks/useNavigation";
+import MyProjectsPage from "./pages/MyProjectsPage";
+import AllProjectsPage from "./pages/AllProjectsPage";
 
 function App() {
+  const { currentView, navigateTo } = useNavigation();
+
   return (
     <div className="flex flex-col">
-      <Navigation />
+      <Navigation navigateTo={navigateTo} />
       <div className="flex flex-col pt-10">
-        <h1 className="text-5xl font-bold mx-auto">Meine NGO-Projekte</h1>
-        <p className="text-sm mx-auto text-gray-400 mt-2">
-          Gemeinsam Veränderung schaffen: Deine Initiativen für eine bessere
-          Welt.
-        </p>
-        <ProjectView />
+        {currentView === "MyProjects" && <MyProjectsPage />}
+        {currentView === "AllProjects" && <AllProjectsPage />}
       </div>
     </div>
   );
