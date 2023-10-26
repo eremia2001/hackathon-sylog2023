@@ -16,12 +16,12 @@ public class TaskController {
         this.taskRepository = taskRepository;
     }
 
-    @GetMapping("/projects")
+    @GetMapping("/tasks")
     List<Task> getTasks(){
         return taskRepository.findAll();
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/task/{id}")
     Task getTask(@PathVariable Long id){
         return taskRepository.getReferenceById(id);
     }

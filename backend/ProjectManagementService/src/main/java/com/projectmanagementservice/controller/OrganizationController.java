@@ -16,12 +16,12 @@ public class OrganizationController {
         this.organizationRepository = organizationRepository;
     }
 
-    @GetMapping("/projects")
+    @GetMapping("/organizations")
     List<Organization> getOrganizations(){
         return organizationRepository.findAll();
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/organizations/{id}")
     Organization getOrganization(@PathVariable Long id){
         return organizationRepository.getReferenceById(id);
     }
