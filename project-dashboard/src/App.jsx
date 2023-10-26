@@ -19,7 +19,14 @@ function App() {
   return (
     <div className="flex flex-col">
       <Navigation />
-      <ProjectView className="p-16" />
+      <div className="flex flex-col pt-10">
+        <h1 className="text-5xl font-bold mx-auto">Meine NGO-Projekte</h1>
+        <p className="text-sm mx-auto text-gray-400 mt-2">
+          Gemeinsam Veränderung schaffen: Deine Initiativen für eine bessere
+          Welt.
+        </p>
+        <ProjectView />
+      </div>
     </div>
   );
 }
