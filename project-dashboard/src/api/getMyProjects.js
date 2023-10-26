@@ -1,6 +1,6 @@
 import mockup_data from "../data/projects";
-function getProjects() {
+function getMyProjects() {
   return mockup_data;
 }
 
-export default getProjects;
+export default getMyProjects;

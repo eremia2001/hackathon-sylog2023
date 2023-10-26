@@ -21,13 +21,11 @@ import { DateRangePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-function PopupFormCard() {
+function PopupFormCard({ isFormOpen, handleCloseForm }) {
   // Constants
   const ngos = [{ label: "NGO 1" }, { label: "NGO 2" }];
   const today = dayjs();
-
   // State variables
-  const [isFormOpen, setFormOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [projectOwner, setProjectOwner] = useState("");
   const [projectMembers, setProjectMembers] = useState(ngos);
@@ -37,8 +35,7 @@ function PopupFormCard() {
   const [endDate] = useState(today);
 
   // Event handlers
-  const handleOpenForm = () => setFormOpen(true);
-  const handleCloseForm = () => setFormOpen(false);
+
   const handleInputChange = (setter) => (e) => setter(e.target.value);
   const handleFileDrop = (e) => {
     e.preventDefault();
@@ -52,6 +49,7 @@ function PopupFormCard() {
     setDroppedFiles(files);
   };
   const handleSubmitForm = () => {
+    //TODO: speichern in Datenbank
     console.log("Form submitted. Project Name: ", projectName);
     console.log("Owner: ", projectOwner);
     console.log("Members: ", projectMembers);
@@ -63,15 +61,6 @@ function PopupFormCard() {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardContent>
-          <Typography variant="h5">New Project</Typography>
-          <Button variant="contained" color="primary" onClick={handleOpenForm}>
-            +
-          </Button>
-        </CardContent>
-      </Card>
-
       <Modal open={isFormOpen} onClose={handleCloseForm}>
         <Box
           sx={{

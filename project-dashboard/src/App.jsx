@@ -18,8 +18,8 @@ import CreateProjectView from "./components/CreateProjectView";
 function App() {
   return (
     <div className="flex flex-col">
-      <Navigation></Navigation>
-      <CreateProjectView></CreateProjectView>
+      <Navigation />
+      <ProjectView className="p-16" />
     </div>
   );
 }

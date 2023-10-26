@@ -1,8 +1,8 @@
 import { useState } from "react";
-import getProjects from "../api/getProjects";
+import getMyProjects from "../api/getMyProjects";
 
 function useProjects() {
-  const [projects, setProjects] = useState(getProjects());
+  const [projects, setProjects] = useState(getMyProjects());
   return [projects, setProjects];
 }
 
