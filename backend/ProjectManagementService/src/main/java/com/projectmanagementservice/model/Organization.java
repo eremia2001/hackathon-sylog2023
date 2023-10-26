@@ -22,7 +22,7 @@ public class Organization {
     private String name;
 
     @Column
-    private Date start;
+    private Date startDate;
 
     @Column
     private String address;
@@ -38,7 +38,7 @@ public class Organization {
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<User> members;
+    private Set<Member> members;
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
     private Set<Project> projects;

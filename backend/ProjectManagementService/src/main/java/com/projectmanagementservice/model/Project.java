@@ -25,10 +25,10 @@ public class Project {
     private String description;
 
     @Column
-    private Date start;
+    private Date startDate;
 
     @Column
-    private Date end;
+    private Date endDate;
 
     @Column
     private int budget;

@@ -1,5 +1,5 @@
 package com.projectmanagementservice.model;
 
-public enum UserRole {
+public enum MemberRole {
     MEMBER
 }

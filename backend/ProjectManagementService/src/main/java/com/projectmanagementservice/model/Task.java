@@ -40,6 +40,6 @@ public class Task {
     private Set<Comment> comments;
 
     @ManyToOne
-    @JoinColumn(name = "assigned_user_id")
-    private User assignedUser;
+    @JoinColumn(name = "assigned_member_id")
+    private Member assignedMember;
 }

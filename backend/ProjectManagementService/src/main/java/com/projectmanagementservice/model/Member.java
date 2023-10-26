@@ -10,7 +10,7 @@ import java.util.Set;
 @Table
 @Getter
 @Setter
-public class User {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +23,7 @@ public class User {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.MEMBER;
+    private MemberRole role = MemberRole.MEMBER;
 
     // todo password hash ?
 
@@ -31,9 +31,9 @@ public class User {
     @JoinColumn(name = "org_id")
     private Organization organization;
 
-    @OneToMany(mappedBy = "assignedUser", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "assignedMember", fetch = FetchType.LAZY)
     private Set<Task> assignedTasks;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<Comment> writtenComments;
 }
