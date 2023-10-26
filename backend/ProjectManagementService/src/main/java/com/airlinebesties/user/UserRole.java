@@ -1,2 +1,5 @@
-package com.airlinebesties.user;public enum UserRole {
+package com.airlinebesties.user;
+
+public enum UserRole {
+    MEMBER
 }
