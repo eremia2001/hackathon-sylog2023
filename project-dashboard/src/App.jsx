@@ -13,22 +13,13 @@ import {
 } from "@mui/material";
 import Navigation from "./components/Navigation";
 import ProjectView from "./components/ProjectView";
+import CreateProjectView from "./components/CreateProjectView";
 
 function App() {
   return (
     <div className="flex flex-col">
-      {/* NavBar */}
-      <Navigation />
-      <h1 className="mx-auto font-bold text-5xl mt-20">
-        Projekte, die Veränderungen bewirken
-      </h1>
-      <p className="text-sm text-gray-500 mx-auto mt-2">
-        Entdecken Sie die vielfältigen Initiativen, durch die unsere
-        Gemeinschaft einen positiven Einfluss nimmt.
-      </p>
-      <div className="p-60">
-        <ProjectView />
-      </div>
+      <Navigation></Navigation>
+      <CreateProjectView></CreateProjectView>
     </div>
   );
 }
