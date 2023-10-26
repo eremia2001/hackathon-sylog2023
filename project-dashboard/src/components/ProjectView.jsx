@@ -13,7 +13,7 @@ const ProjectView = () => {
         getMyProjects().then(projects => {
             setProjects(projects)
         })
-    }, []);
+    }, [projects]);
 
   return (
     <div className="grid grid-cols-2 gap-20 max-w-[1080px] mx-auto shadow-xl p-5 mt-10">

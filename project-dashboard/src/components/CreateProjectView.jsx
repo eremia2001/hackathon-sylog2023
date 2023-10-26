@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Grid,
   IconButton,
   InputAdornment,
@@ -14,15 +12,15 @@ import {
   Autocomplete,
 } from "@mui/material";
 import {
-  AddCircleOutline as AddCircleOutlineIcon,
   AccountCircle,
   Image as ImageIcon,
   CloudUpload as CloudUploadIcon,
+  Close as CloseIcon
 } from "@mui/icons-material";
-import { DateRangePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import {DateRangePicker, LocalizationProvider} from "@mui/x-date-pickers-pro";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { Close as CloseIcon } from "@mui/icons-material";
+import postNewProject from "../api/postNewProject";
 
 function PopupFormCard({ isFormOpen, handleCloseForm }) {
   // Constants
@@ -33,7 +31,7 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
   const [projectOwner, setProjectOwner] = useState("");
   const [projectMembers, setProjectMembers] = useState(ngos);
   const [projectDescription, setProjectDescription] = useState("");
-  const [droppedFiles, setDroppedFiles] = useState([]);
+  const [image, setImage] = useState([]);
   const [startDate] = useState(today);
   const [endDate] = useState(today);
 
@@ -43,22 +41,23 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
   const handleFileDrop = (e) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
-    setDroppedFiles(files);
+    setImage(files);
   };
   const handleFileInputClick = () =>
     document.getElementById("fileInput").click();
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
-    setDroppedFiles(files);
+    setImage(files);
   };
   const handleSubmitForm = () => {
-    //TODO: speichern in Datenbank
-    console.log("Form submitted. Project Name: ", projectName);
-    console.log("Owner: ", projectOwner);
-    console.log("Members: ", projectMembers);
-    console.log("Description: ", projectDescription);
-    console.log("Date range: ", startDate, "-", endDate);
-    console.log("Uploaded files: ", droppedFiles);
+    let project = {
+      "title": projectName,
+      "description": projectDescription,
+      "assignedPeople": projectMembers,
+      "ngo": projectOwner,
+      "image": image
+    }
+    postNewProject(project, "./data/test.json").then(r => console.log(r))
     handleCloseForm();
   };
 
