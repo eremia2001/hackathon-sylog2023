@@ -1,19 +1,6 @@
 version: '2'
 
 services:
-  app:
-    image: 'docker-spring-boot-postgres:latest'
-    build:
-      context: ./docker
-    container_name: app
-    depends_on:
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/ngo_db
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
   db:
     image: 'postgres:13.1-alpine'
     container_name: db
@@ -21,5 +8,6 @@ services:
        POSTGRES_DB: ngo_db
        POSTGRES_USER: admin
        POSTGRES_PASSWORD: mysupersecretpw
+       POSTGRES_PORT: 5432
     ports:
       - 5432:5432
