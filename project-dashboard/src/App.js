@@ -1,12 +1,24 @@
-import './App.css';
-import ProjectItem from "./ProjectItem";
+import * as React from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  IconButton,
+} from "@mui/material";
 import Navigation from "./Navigation";
+import ProjectView from "./ProjectView";
 
 function App() {
   return (
-    <div className="App">
-        <Navigation></Navigation>
-        <ProjectItem></ProjectItem>
+    <div>
+      {/* NavBar */}
+      <Navigation />
+      <ProjectView />
     </div>
   );
 }
