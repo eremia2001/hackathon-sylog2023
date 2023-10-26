@@ -1,5 +1,6 @@
-import mockup_data from "../data/projects";
-function getMyProjects() {
+import mockup_data from "../data/projects.json";
+async function getMyProjects() {
+  console.log(mockup_data)
   return mockup_data;
 }
 

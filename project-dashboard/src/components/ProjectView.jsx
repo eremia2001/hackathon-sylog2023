@@ -1,12 +1,19 @@
 import ProjectItem from "./ProjectItem";
-import useProjects from "../hooks/useProjects";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import PopupFormCard from "./CreateProjectView";
+import getMyProjects from "../api/getMyProjects";
 
 const ProjectView = () => {
-  const [projects, setProjects] = useProjects();
+  const [projects, setProjects] = useState([]);
   const [isFormOpen, setFormOpen] = useState(false);
   const handleCloseForm = () => setFormOpen(false);
+
+    useEffect(() => {
+        console.log("hallo ich bin daten" + projects)
+        getMyProjects().then(projects => {
+            setProjects(projects)
+        })
+    }, []);
 
   return (
     <div className="grid grid-cols-2 gap-20 max-w-[1080px] mx-auto shadow-xl p-5">
@@ -37,5 +44,6 @@ const ProjectView = () => {
     </div>
   );
 };
+
 
 export default ProjectView;

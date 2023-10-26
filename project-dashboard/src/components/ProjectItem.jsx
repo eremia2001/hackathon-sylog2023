@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+
 
 const ProjectItem = ({ project }) => {
-  const { title, image, description } = project;
+  const { title, imageUrl, description } = project;
   return (
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
