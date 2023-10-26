@@ -16,12 +16,12 @@ public class MemberController {
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping("/organizations")
+    @GetMapping("/members")
     List<Member> getMembers(){
         return memberRepository.findAll();
     }
 
-    @GetMapping("/organizations/{id}")
+    @GetMapping("/members/{id}")
     Member getMember(@PathVariable Long id){
         return memberRepository.getReferenceById(id);
     }

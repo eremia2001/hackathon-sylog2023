@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -56,4 +57,7 @@ public class Project {
     @OneToMany(mappedBy = "project")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments;
+
+    @ManyToMany(mappedBy = "projects")
+    private Set<Resource> resources = new HashSet<>();
 }
