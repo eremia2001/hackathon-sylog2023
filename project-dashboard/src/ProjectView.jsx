@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectItem from "ProjectItem";
+import ProjectItem from "./ProjectItem";
 
 class ProjectView extends Component {
   render() {
