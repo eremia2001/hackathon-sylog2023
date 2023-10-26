@@ -12,8 +12,8 @@ public class TaskController {
     private final TaskRepository taskRepository;
 
     @Autowired
-    public TaskController(TaskRepository TaskRepository) {
-        this.taskRepository = TaskRepository;
+    public TaskController(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     @GetMapping("/projects")
