@@ -9,7 +9,7 @@ const ProjectView = () => {
   const handleCloseForm = () => setFormOpen(false);
 
   return (
-    <div className="grid grid-cols-2 gap-20 max-w-[1080px] mx-auto shadow-xl p-5">
+    <div className="grid grid-cols-2 gap-20 max-w-[1080px] mx-auto shadow-xl p-5 mt-10">
       {" "}
       {/* Hier wird das Grid mit 2 Spalten erstellt */}
       <div className="bg-[#EBEDF0] text-white rounded-md  mx-auto my-auto text-5xl font-bold cursor-pointer">
