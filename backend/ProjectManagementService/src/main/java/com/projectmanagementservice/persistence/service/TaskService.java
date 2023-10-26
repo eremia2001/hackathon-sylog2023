@@ -69,7 +69,7 @@ public class TaskService {
         }
     }
 
-    public Task createTask(Task task){
+    public Task addTask(Task task){
         return taskRepository.save(task);
     }
 

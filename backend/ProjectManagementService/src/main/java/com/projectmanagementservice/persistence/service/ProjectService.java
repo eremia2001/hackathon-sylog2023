@@ -43,7 +43,7 @@ public class ProjectService {
         return memberOrg.getProjects();
     }
 
-    public Project insertProject(ProjectDto dto){
+    public Project addProject(ProjectDto dto){
         Project project = new Project();
         project.setName(dto.getName());
 

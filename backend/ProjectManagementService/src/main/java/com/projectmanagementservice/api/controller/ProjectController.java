@@ -33,8 +33,8 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/create")
-    ResponseEntity<Project> createProject(@RequestBody ProjectDto dto){
-        Project pr = projectService.insertProject(dto);
+    ResponseEntity<Project> addProject(@RequestBody ProjectDto dto){
+        Project pr = projectService.addProject(dto);
         return ResponseEntity.status(HttpStatus.OK).body(pr);
     }
 

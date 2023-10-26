@@ -1,7 +1,6 @@
 package com.projectmanagementservice.api.controller;
 
 import com.projectmanagementservice.persistence.model.Organization;
-import com.projectmanagementservice.persistence.repository.OrganizationRepository;
 import com.projectmanagementservice.persistence.service.OrganizationService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class OrganizationController {
     }
 
     @PostMapping("/organizations/create")
-    ResponseEntity<Organization> createOrganization(@RequestBody Organization organization){
+    ResponseEntity<Organization> addOrganization(@RequestBody Organization organization){
         return ResponseEntity.status(HttpStatus.OK).body(organizationService.save(organization));
     }
 

@@ -21,4 +21,12 @@ public class MemberService {
         return memberRepository.findById(member_id).
                 orElseThrow(() -> new NotFoundException("Member with ID " + member_id + " not found!"));
     }
+
+    public Member addMember(Member member){
+        return memberRepository.save(member);
+    }
+
+    public void deleteById(Long memberId){
+        memberRepository.deleteById(memberId);
+    }
 }
