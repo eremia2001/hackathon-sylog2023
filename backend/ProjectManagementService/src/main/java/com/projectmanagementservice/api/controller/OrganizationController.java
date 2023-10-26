@@ -30,7 +30,7 @@ public class OrganizationController {
         return organizationService.findById(id);
     }
 
-    @PostMapping("/organizations")
+    @PostMapping("/organizations/create")
     ResponseEntity<Organization> createOrganization(@RequestBody Organization organization){
         return ResponseEntity.status(HttpStatus.OK).body(organizationService.save(organization));
     }
