@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
+import Image from "./res/template.jpeg"
 
 class ProjectItem extends Component {
     render() {
@@ -9,15 +10,16 @@ class ProjectItem extends Component {
                     component="img"
                     alt="green iguana"
                     height="140"
+                    image={Image}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                        Project 1
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
                     </Typography>
+
                 </CardContent>
                 <CardActions>
                     <Button size="small">Share</Button>
