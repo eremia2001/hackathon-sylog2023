@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class ProjectDto {
-    private Long id;
     private String name;
     private String description;
     private String startDate;
