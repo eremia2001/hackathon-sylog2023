@@ -1,8 +1,5 @@
-package com.airlinebesties.user;
+package com.projectmanagementservice.model;
 
-import com.airlinebesties.comment.Comment;
-import com.airlinebesties.organization.Organization;
-import com.airlinebesties.task.Task;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

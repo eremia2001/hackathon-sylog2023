@@ -1,4 +1,4 @@
-package com.airlinebesties.project;
+package com.projectmanagementservice.model;
 
 public enum ProjectStatus {
     UPCOMING,

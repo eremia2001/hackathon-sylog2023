@@ -1,4 +1,4 @@
-package com.airlinebesties.ProjectManagementService;
+package com.projectmanagementservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

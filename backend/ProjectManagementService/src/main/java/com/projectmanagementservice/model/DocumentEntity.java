@@ -1,22 +1,18 @@
-package com.airlinebesties.imageentity;
+package com.projectmanagementservice.model;
 
-import com.airlinebesties.project.Project;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "image")
-public class ImageEntity {
+@Table(name = "document")
+public class DocumentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
     @Lob
-    private byte[] imageBytes;
+    private byte[] docBytes;
 
     @ManyToOne
     @JoinColumn(name="project_id")
     private Project project;
-
 }

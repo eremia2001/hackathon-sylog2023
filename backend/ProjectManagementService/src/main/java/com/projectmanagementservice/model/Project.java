@@ -1,10 +1,5 @@
-package com.airlinebesties.project;
+package com.projectmanagementservice.model;
 
-import com.airlinebesties.comment.Comment;
-import com.airlinebesties.documententity.DocumentEntity;
-import com.airlinebesties.imageentity.ImageEntity;
-import com.airlinebesties.organization.Organization;
-import com.airlinebesties.task.Task;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

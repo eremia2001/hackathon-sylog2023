@@ -1,4 +1,4 @@
-package com.airlinebesties.task;
+package com.projectmanagementservice.model;
 
 public enum TaskStatus {
     OPEN,
