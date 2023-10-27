@@ -12,29 +12,15 @@ import CommentSection from "../components/CommentSection";
 import { useToggle } from "../hooks/useToogle";
 import getProjectTasks from "../api/getProjectTasks";
 
-const ProjectDetailsPage = () => {
+const ProjectDetailsPage = ({ project }) => {
   const [selected, toggle] = useToggle();
   const projectTasks = getProjectTasks();
 
   return (
     <div className="flex flex-col max-w-[1080px] gap-3 mx-auto px-40 py-20 shadow-2xl">
-      <img
-        src="https://picsum.photos/300/200"
-        className="w-full object-cover"
-        width={10}
-      />
-      <h1 className="text-3xl font-bold ">Project 1</h1>
-      <p className="text-gray-400 text-sm">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-        amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-        ipsum dolor sit amet.
-      </p>
+      <img src={project.image} className="w-full object-cover" width={10} />
+      <h1 className="text-3xl font-bold ">{project.title}</h1>
+      <p className="text-gray-400 text-sm">{project.long_description}</p>
 
       <div className="flex flex-row gap-5 justify-center items-center">
         <img
@@ -105,16 +91,16 @@ const ProjectDetailsPage = () => {
 
       <ToggleComponent selected={selected} toggle={toggle} />
       {selected == "right" ? (
-        <div>
+        <div className="flex flex-col gap-16">
           {" "}
           <ToDoComponent todos={projectTasks} />
           <OnDoingTodo todos={projectTasks} />
           <FinishedTodo todos={projectTasks} />
-          <CommentSection />
         </div>
       ) : (
         ""
       )}
+      <CommentSection />
     </div>
   );
 };

@@ -29,11 +29,12 @@ const ToDoComponent = ({ todos }) => {
                 <label className="sr-only" htmlFor={`Row${index + 1}`}>
                   Row {index + 1}
                 </label>
-                <input
-                  className="h-5 w-5 rounded border-gray-300"
-                  type="checkbox"
+                <button
+                  className=" w-28 rounded  border-2 border-gray-500 hover:border-blue-700 text-black"
                   id={`Row${index + 1}`}
-                />
+                >
+                  Start
+                </button>
               </td>
               <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 {todo.task}

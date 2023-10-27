@@ -24,7 +24,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { Close as CloseIcon } from "@mui/icons-material";
 
-function PopupFormCard({ isFormOpen, handleCloseForm }) {
+function PopupFormCard({ isFormOpen, handleCloseForm, setProjects, projects }) {
   // Constants
   const ngos = [{ label: "NGO 1" }, { label: "NGO 2" }];
   const today = dayjs();
@@ -59,6 +59,13 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
     console.log("Description: ", projectDescription);
     console.log("Date range: ", startDate, "-", endDate);
     console.log("Uploaded files: ", droppedFiles);
+    const newProject = {
+      title: projectName,
+      image: "URL_FÜR_MENSCHENHANDEL_BILD",
+      description: projectDescription,
+      long_description: "",
+    };
+    setProjects((prevProjects) => [...prevProjects, newProject]);
     handleCloseForm();
   };
 

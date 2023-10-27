@@ -3,7 +3,7 @@ import useProjects from "../hooks/useProjects";
 import React, { useState } from "react";
 import PopupFormCard from "./CreateProjectView";
 
-const ProjectView = () => {
+const ProjectView = ({ handleProjectClick }) => {
   const [projects, setProjects] = useProjects();
   const [isFormOpen, setFormOpen] = useState(false);
   const handleCloseForm = () => setFormOpen(false);
@@ -27,12 +27,17 @@ const ProjectView = () => {
       </div>
       {projects.map((project) => (
         <div key={project.title} className="mx-auto">
-          <ProjectItem project={project} />
+          <ProjectItem
+            project={project}
+            handleProjectClick={() => handleProjectClick(project)}
+          />
         </div>
       ))}
       <PopupFormCard
         isFormOpen={isFormOpen}
         handleCloseForm={handleCloseForm}
+        setProjects={setProjects}
+        projects={projects}
       />
     </div>
   );

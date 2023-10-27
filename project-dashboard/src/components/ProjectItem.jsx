@@ -8,16 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project, handleProjectClick }) => {
   const { title, image, description } = project;
+  console.log(image);
   return (
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div
+      class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      onClick={handleProjectClick}
+    >
       <a href="#">
-        <img
-          class="rounded-t-lg w-full"
-          src="https://picsum.photos/300/200"
-          alt=""
-        />
+        <img class="rounded-t-lg w-full" src={image} alt="img" />
       </a>
       <div class="p-5">
         <a href="#">

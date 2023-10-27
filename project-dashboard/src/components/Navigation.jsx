@@ -36,19 +36,7 @@ function Navigation({ navigateTo }) {
                 Meine Projekte
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleNavigationClick("ProjectDetails")}
-                className={`block py-2 pl-3 pr-4  ${
-                  activePage === "ProjectDetails"
-                    ? "text-blue-700"
-                    : " hover:text-blue-700 text-gray-900"
-                } rounded md:bg-transparent md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent`}
-              >
-                Project Details
-              </a>
-            </li>
+
             <li>
               <a
                 href="#"
