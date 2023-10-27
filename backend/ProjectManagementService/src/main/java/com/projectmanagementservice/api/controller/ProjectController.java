@@ -33,9 +33,9 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/create")
-    ResponseEntity<Project> addProject(@RequestBody ProjectDto dto){
+    ResponseEntity<ProjectDto> addProject(@RequestBody ProjectDto dto){
         Project pr = projectService.addProject(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(pr);
+        return ResponseEntity.status(HttpStatus.OK).body(new ProjectDto());
     }
 
     @DeleteMapping("/projects/delete/{projectId}")

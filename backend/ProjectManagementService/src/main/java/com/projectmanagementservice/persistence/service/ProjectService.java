@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.*;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class ProjectService {
 
@@ -28,22 +30,22 @@ public class ProjectService {
     @Autowired
     ImageService imageService;
 
-    public List<Project> findAll(){
+    public List<Project> findAll() {
         return projectRepository.findAll();
     }
 
-    public Project findById(Long project_id){
+    public Project findById(Long project_id) {
         return projectRepository.findById(project_id).
                 orElseThrow(() -> new NotFoundException("Project with ID " + project_id + " not found!"));
     }
 
-    public Set<Project> findProjectsOfMember(Long member_id){
+    public Set<Project> findProjectsOfMember(Long member_id) {
         Member member = memberService.findById(member_id);
-        Organization memberOrg =  member.getOrganization();
+        Organization memberOrg = member.getOrganization();
         return memberOrg.getProjects();
     }
 
-    public Project addProject(ProjectDto dto){
+    public Project addProject(ProjectDto dto) {
         Project project = new Project();
         project.setName(dto.getName());
 
@@ -56,22 +58,29 @@ public class ProjectService {
         project.setEndDate(Date.valueOf(dto.getEndDate()));
 
         Set<Member> projectMembers = new HashSet<>();
-        dto.getMemberIds().forEach(mId -> {
-            Member m = memberService.findById(mId);
-            if (!project.getMembers().contains(m)){
-                throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", mId));
-            }
-            projectMembers.add(m);
-        });
+        if (dto.getMemberIds() != null) {
+            dto.getMemberIds().forEach(mId -> {
+
+                Member m = memberService.findById(mId);
+                if (!project.getMembers().contains(m)) {
+                    throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", mId));
+                }
+                projectMembers.add(m);
+
+            });
+        }
         project.setMembers(projectMembers);
 
-        dto.getImages().forEach(img -> {
-            ImageEntity imgEntity = new ImageEntity();
-            imgEntity.setName(img.getName());
-            imgEntity.setImageBytes(img.getBytes());
-            imgEntity.setProject(project);
-            imageService.save(imgEntity);
-        });
+
+        if (dto.getImages() != null) {
+            dto.getImages().forEach(img -> {
+                ImageEntity imgEntity = new ImageEntity();
+                imgEntity.setName(img.getName());
+                imgEntity.setImageBytes(img.getBytes());
+                imgEntity.setProject(project);
+                imageService.save(imgEntity);
+            });
+        }
 
         return projectRepository.save(project);
     }
@@ -80,7 +89,7 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public void deleteById(Long projectId){
+    public void deleteById(Long projectId) {
         projectRepository.deleteById(projectId);
     }
 }
