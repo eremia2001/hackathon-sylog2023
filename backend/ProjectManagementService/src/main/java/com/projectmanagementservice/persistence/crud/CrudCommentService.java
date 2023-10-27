@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 
 import com.projectmanagementservice.persistence.model.Comment;
@@ -11,35 +11,35 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CommentService {
+public class CrudCommentService {
 
     @Autowired
     CommentRepository commentRepository;
 
     @Autowired
-    TaskService taskService;
+    CrudTaskService crudTaskService;
 
     @Autowired
-    ProjectService projectService;
+    CrudProjectService crudProjectService;
 
     public List<Comment> findAllByTaskId(Long id){
-        Task task = taskService.findById(id);
+        Task task = crudTaskService.findById(id);
         return commentRepository.findAllByTask(task);
     }
 
     public List<Comment> findAllByProjectId(Long id){
-        Project project = projectService.findById(id);
+        Project project = crudProjectService.findById(id);
         return commentRepository.findAllByProject(project);
     }
 
     public Comment addCommentToTask(Long taskId, Comment comment){
-        Task task = taskService.findById(taskId);
+        Task task = crudTaskService.findById(taskId);
         comment.setTask(task);
         return commentRepository.save(comment);
     }
 
     public Comment addCommentToProject(Long projectId, Comment comment){
-        Project project = projectService.findById(projectId);
+        Project project = crudProjectService.findById(projectId);
         comment.setProject(project);
         return commentRepository.save(comment);
     }

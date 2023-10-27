@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 import com.projectmanagementservice.exception.NotFoundException;
 import com.projectmanagementservice.persistence.model.ImageEntity;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ImageService {
+public class CrudImageService {
     @Autowired
     ImageEntityRepository imageEntityRepository;
 

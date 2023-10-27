@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 import com.projectmanagementservice.api.model.ProjectDto;
 import com.projectmanagementservice.exception.NotFoundException;
@@ -13,22 +13,20 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.*;
 
-import static java.util.Objects.isNull;
-
 @Service
-public class ProjectService {
+public class CrudProjectService {
 
     @Autowired
     ProjectRepository projectRepository;
 
     @Autowired
-    MemberService memberService;
+    CrudMemberService crudMemberService;
 
     @Autowired
-    OrganizationService organizationService;
+    CrudOrganizationService crudOrganizationService;
 
     @Autowired
-    ImageService imageService;
+    CrudImageService crudImageService;
 
     public List<Project> findAll() {
         return projectRepository.findAll();
@@ -40,16 +38,18 @@ public class ProjectService {
     }
 
     public Set<Project> findProjectsOfMember(Long member_id) {
-        Member member = memberService.findById(member_id);
+        Member member = crudMemberService.findById(member_id);
         Organization memberOrg = member.getOrganization();
         return memberOrg.getProjects();
     }
 
     public Project addProject(ProjectDto dto) {
         Project project = new Project();
+
+        project.setId(dto.getId());
         project.setName(dto.getName());
 
-        Organization organization = organizationService.findById(dto.getOrganizationId());
+        Organization organization = crudOrganizationService.findById(dto.getOrganizationId());
         project.setOrganization(organization);
 
         project.setDescription(dto.getDescription());
@@ -58,28 +58,26 @@ public class ProjectService {
         project.setEndDate(Date.valueOf(dto.getEndDate()));
 
         Set<Member> projectMembers = new HashSet<>();
-        if (dto.getMemberIds() != null) {
-            dto.getMemberIds().forEach(mId -> {
-
-                Member m = memberService.findById(mId);
+        if (dto.getMembers() != null && !dto.getMembers().isEmpty()) {
+            dto.getMembers().forEach(m -> {
                 if (!project.getMembers().contains(m)) {
-                    throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", mId));
+                    throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", m.getId()));
                 }
                 projectMembers.add(m);
-
             });
         }
         project.setMembers(projectMembers);
 
-
-        if (dto.getImages() != null) {
+        if (dto.getImages() != null && !dto.getImages().isEmpty()) {
             dto.getImages().forEach(img -> {
                 ImageEntity imgEntity = new ImageEntity();
                 imgEntity.setName(img.getName());
                 imgEntity.setImageBytes(img.getBytes());
                 imgEntity.setProject(project);
-                imageService.save(imgEntity);
+                crudImageService.save(imgEntity);
             });
+        } else {
+            project.setImages(Set.of());
         }
 
         return projectRepository.save(project);

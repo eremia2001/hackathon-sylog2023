@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 import com.projectmanagementservice.exception.NotFoundException;
 import com.projectmanagementservice.persistence.model.Organization;
@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrganizationService {
+public class CrudOrganizationService {
 
     @Autowired
     OrganizationRepository organizationRepository;
 
     @Autowired
-    MemberService memberService;
+    CrudMemberService crudMemberService;
 
     public Organization findById(Long id) {
         return organizationRepository.findById(id).orElseThrow(() -> new NotFoundException("Project with ID " + id + " not found!"));
@@ -27,5 +27,9 @@ public class OrganizationService {
 
     public Organization save(Organization organization) {
         return organizationRepository.save(organization);
+    }
+
+    public void deleteOrganization(Long orgId){
+        organizationRepository.deleteById(orgId);
     }
 }
