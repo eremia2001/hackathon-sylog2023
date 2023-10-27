@@ -2,7 +2,6 @@ package com.projectmanagementservice.api.model;
 
 import com.projectmanagementservice.persistence.model.Member;
 import com.projectmanagementservice.persistence.model.Task;
-import jakarta.annotation.Nullable;
 import lombok.Data;
 
 import java.util.List;

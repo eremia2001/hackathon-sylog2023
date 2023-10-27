@@ -27,14 +27,14 @@ public class MappingService {
         projectDto.setEndDate(project.getEndDate().toString());
         projectDto.setBudget(project.getBudget());
         projectDto.setStatus(project.getStatus().toString());
-
-        Set<Member> members;
-        if(project.getMembers() != null && !project.getMembers().isEmpty()){
-            members = project.getMembers();
-        } else {
-            members = Set.of();
-        }
-        projectDto.setMembers(members.stream().toList());
+//
+//        Set<Member> members;
+//        if(project.getMembers() != null && !project.getMembers().isEmpty()){
+//            members = project.getMembers();
+//        } else {
+//            members = Set.of();
+//        }
+//        projectDto.setMembers(members.stream().toList());
 
         Set<Task> tasks;
         if(project.getTasks() != null && !project.getTasks().isEmpty()){

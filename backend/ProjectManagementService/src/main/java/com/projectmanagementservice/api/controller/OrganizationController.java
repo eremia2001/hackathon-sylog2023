@@ -19,22 +19,22 @@ public class OrganizationController {
         this.crudOrganizationService = crudOrganizationService;
     }
 
-    @GetMapping("/organizations")
+    @GetMapping("/api/organizations")
     List<Organization> getOrganizations(){
         return crudOrganizationService.findAll();
     }
 
-    @GetMapping("/organizations/{id}")
+    @GetMapping("/api/organizations/{id}")
     Organization getOrganization(@PathVariable Long id){
         return crudOrganizationService.findById(id);
     }
 
-    @PostMapping("/organizations/create")
+    @PostMapping("/api/organizations/create")
     ResponseEntity<Organization> addOrganization(@RequestBody Organization organization){
         return ResponseEntity.status(HttpStatus.OK).body(crudOrganizationService.save(organization));
     }
 
-    @DeleteMapping("/organizations/delete/{orgId}")
+    @DeleteMapping("/api/organizations/delete/{orgId}")
     ResponseEntity<String> deleteOrganization(@PathVariable Long orgId){
         crudOrganizationService.deleteOrganization(orgId);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted Organization");

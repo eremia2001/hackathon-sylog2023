@@ -22,7 +22,7 @@ public class Resource {
     @Column
     private Integer amount;
 
-    @ManyToMany
-    @JoinTable(name = "project_resource", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "resource_id"))
-    private Set<Project> projects = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 }

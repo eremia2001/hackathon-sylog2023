@@ -21,28 +21,24 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @GetMapping("/projects")
+
+    @GetMapping("/api/projects")
     List<ProjectDto> getProjects(){
         return projectService.getAllProjects();
     }
 
-    @GetMapping("/projects/{project_id}")
-    ProjectDto getProjectByID(@PathVariable Long project_id){
-        return projectService.getProjectById(project_id);
+    @GetMapping("/api/projects/{projectId}")
+    ProjectDto getProjectByID(@PathVariable Long projectId){
+        return projectService.getProjectById(projectId);
     }
 
-    @GetMapping("/projects/members/{member_id}")
-    Set<Project> getMyProjects(@PathVariable Long member_id){
-        return crudProjectService.findProjectsOfMember(member_id);
-    }
-
-    @PostMapping("/projects/create")
+    @PostMapping("/api/projects/create")
     ResponseEntity<ProjectDto> addProject(@RequestBody ProjectDto dto){
         ProjectDto pDto = projectService.addProject(dto);
         return ResponseEntity.status(HttpStatus.OK).body(pDto);
     }
 
-    @DeleteMapping("/projects/delete/{projectId}")
+    @DeleteMapping("/api/projects/delete/{projectId}")
     ResponseEntity<String> deleteProject(@PathVariable Long projectId){
         crudProjectService.deleteById(projectId);
         return ResponseEntity.status(HttpStatus.OK).body("Project deleted");
