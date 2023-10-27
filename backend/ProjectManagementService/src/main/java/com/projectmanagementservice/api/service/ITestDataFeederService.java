@@ -6,7 +6,6 @@ import com.projectmanagementservice.persistence.model.Project;
 import com.projectmanagementservice.persistence.model.Task;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,3 +20,4 @@ public interface ITestDataFeederService {
 
     public List<Member> createDummyMembers();
 }
+
