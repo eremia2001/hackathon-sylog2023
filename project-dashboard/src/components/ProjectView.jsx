@@ -1,7 +1,7 @@
 import ProjectItem from "./ProjectItem";
 import React, {useEffect, useState} from "react";
 import PopupFormCard from "./CreateProjectView";
-import getMyProjects from "../api/getMyProjects";
+import getAllProjects from "../api/getAllProjects";
 
 const ProjectView = () => {
     const [projects, setProjects] = useState([]);
@@ -16,8 +16,12 @@ const ProjectView = () => {
     }
 
     useEffect(() => {
-        getMyProjects().then(projects => {
-            setProjects(projects)
+        getAllProjects().then(response => {
+            response.json().then((data) => {
+                    console.log(data)
+                    setProjects(data)
+                }
+            )
         })
 
     }, [projects]);
