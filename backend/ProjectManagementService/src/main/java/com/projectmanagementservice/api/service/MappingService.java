@@ -5,9 +5,11 @@ import com.projectmanagementservice.api.model.ProjectDto;
 import com.projectmanagementservice.persistence.model.ImageEntity;
 import com.projectmanagementservice.persistence.model.Member;
 import com.projectmanagementservice.persistence.model.Project;
+import com.projectmanagementservice.persistence.model.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MappingService {
@@ -25,9 +27,32 @@ public class MappingService {
         projectDto.setEndDate(project.getEndDate().toString());
         projectDto.setBudget(project.getBudget());
         projectDto.setStatus(project.getStatus().toString());
-        projectDto.setMemberIds(project.getMembers().stream().map(Member::getId).toList());
-        List<ImageDto> imageDtoList = project.getImages().stream().map(this::imageToImageDto).toList();
+
+        Set<Member> members;
+        if(project.getMembers() != null && !project.getMembers().isEmpty()){
+            members = project.getMembers();
+        } else {
+            members = Set.of();
+        }
+        projectDto.setMembers(members.stream().toList());
+
+        Set<Task> tasks;
+        if(project.getTasks() != null && !project.getTasks().isEmpty()){
+            tasks = project.getTasks();
+        } else {
+            tasks = Set.of();
+        }
+        projectDto.setTasks(tasks.stream().toList());
+
+        List<ImageDto> imageDtoList;
+        if(!project.getImages().isEmpty()){
+            imageDtoList = project.getImages().stream().map(this::imageToImageDto).toList();
+        }
+        else{
+            imageDtoList = List.of();
+        }
         projectDto.setImages(imageDtoList);
+        projectDto.setOrganizationId(project.getOrganization().getId());
 
         return projectDto;
     }

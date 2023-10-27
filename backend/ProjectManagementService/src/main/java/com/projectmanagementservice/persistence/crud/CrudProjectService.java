@@ -45,6 +45,8 @@ public class CrudProjectService {
 
     public Project addProject(ProjectDto dto) {
         Project project = new Project();
+
+        project.setId(dto.getId());
         project.setName(dto.getName());
 
         Organization organization = crudOrganizationService.findById(dto.getOrganizationId());
@@ -56,21 +58,17 @@ public class CrudProjectService {
         project.setEndDate(Date.valueOf(dto.getEndDate()));
 
         Set<Member> projectMembers = new HashSet<>();
-        if (dto.getMemberIds() != null) {
-            dto.getMemberIds().forEach(mId -> {
-
-                Member m = crudMemberService.findById(mId);
+        if (dto.getMembers() != null && !dto.getMembers().isEmpty()) {
+            dto.getMembers().forEach(m -> {
                 if (!project.getMembers().contains(m)) {
-                    throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", mId));
+                    throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", m.getId()));
                 }
                 projectMembers.add(m);
-
             });
         }
         project.setMembers(projectMembers);
 
-
-        if (dto.getImages() != null) {
+        if (dto.getImages() != null && !dto.getImages().isEmpty()) {
             dto.getImages().forEach(img -> {
                 ImageEntity imgEntity = new ImageEntity();
                 imgEntity.setName(img.getName());
@@ -78,6 +76,8 @@ public class CrudProjectService {
                 imgEntity.setProject(project);
                 crudImageService.save(imgEntity);
             });
+        } else {
+            project.setImages(Set.of());
         }
 
         return projectRepository.save(project);

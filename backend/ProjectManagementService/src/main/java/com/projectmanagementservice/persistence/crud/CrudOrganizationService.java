@@ -28,4 +28,8 @@ public class CrudOrganizationService {
     public Organization save(Organization organization) {
         return organizationRepository.save(organization);
     }
+
+    public void deleteOrganization(Long orgId){
+        organizationRepository.deleteById(orgId);
+    }
 }

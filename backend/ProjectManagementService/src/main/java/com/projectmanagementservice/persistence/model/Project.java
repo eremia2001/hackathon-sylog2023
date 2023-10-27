@@ -40,6 +40,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "org_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Organization organization;
 
     @ManyToMany(mappedBy = "projects")

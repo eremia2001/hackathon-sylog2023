@@ -1,5 +1,7 @@
 package com.projectmanagementservice.api.model;
 
+import com.projectmanagementservice.persistence.model.Member;
+import com.projectmanagementservice.persistence.model.Task;
 import jakarta.annotation.Nullable;
 import lombok.Data;
 
@@ -15,8 +17,7 @@ public class ProjectDto {
     private Integer budget;
     private String status;
     private Long organizationId;
-    @Nullable
-    private List<Long> memberIds;
-    @Nullable
+    private List<Task> tasks;
+    private List<Member> members;
     private List<ImageDto> images;
 }

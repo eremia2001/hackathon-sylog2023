@@ -34,9 +34,9 @@ public class OrganizationController {
         return ResponseEntity.status(HttpStatus.OK).body(crudOrganizationService.save(organization));
     }
 
-    @ResponseBody
-    @ExceptionHandler(EntityNotFoundException.class)
-    String projectNotFoundHandler(EntityNotFoundException e){
-        return e.getMessage();
+    @DeleteMapping("/organizations/delete/{orgId}")
+    ResponseEntity<String> deleteOrganization(@PathVariable Long orgId){
+        crudOrganizationService.deleteOrganization(orgId);
+        return ResponseEntity.status(HttpStatus.OK).body("Deleted Organization");
     }
 }

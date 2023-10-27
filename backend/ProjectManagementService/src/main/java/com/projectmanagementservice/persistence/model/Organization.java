@@ -37,5 +37,6 @@ public class Organization {
     private Set<Member> members;
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Project> projects;
 }
