@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "title": "Projekt 1",
+  "imageURL": "https://example.com/image1.jpg",
+  "description": "Dies ist ein Beispielprojekt.",
+  "tasks": [
+    "Aufgabe 1",
+    "Aufgabe 2",
+    "Aufgabe 3"
+  ],
+  "resources": [
+    "Ressource 1",
+    "Ressource 2"
+  ],
+  "assignedPeople": 5,
+  "ngo": "NGO 1"
+}
