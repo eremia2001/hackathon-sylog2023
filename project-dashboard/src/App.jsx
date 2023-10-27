@@ -17,6 +17,7 @@ import CreateProjectView from "./components/CreateProjectView";
 import { useNavigation } from "./hooks/useNavigation";
 import MyProjectsPage from "./pages/MyProjectsPage";
 import AllProjectsPage from "./pages/AllProjectsPage";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 function App() {
   const { currentView, navigateTo } = useNavigation();
@@ -27,6 +28,7 @@ function App() {
       <div className="flex flex-col pt-10">
         {currentView === "MyProjects" && <MyProjectsPage />}
         {currentView === "AllProjects" && <AllProjectsPage />}
+        {currentView === "ProjectDetails" && <ProjectDetailsPage />}
       </div>
     </div>
   );
