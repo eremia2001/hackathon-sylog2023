@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import ProjectView from "../components/ProjectView";
 
-const MyProjectsPage = () => {
+const AllProjectsPage = ({ handleProjectClick }) => {
   return (
     <div className="flex flex-col">
-      <h1 className="text-5xl font-bold mx-auto">Alle NGO-Projekte</h1>
+      <h1 className="text-5xl font-bold mx-auto">All NGO-Projects</h1>
       <p className="text-md mx-auto text-gray-400 mt-2">
-        Vereint für das Gute: Entdecke Initiativen aus unserer Gemeinschaft.
+        United for Good: Discover initiatives from our community.{" "}
       </p>
+      <ProjectView handleProjectClick={handleProjectClick} />
     </div>
   );
 };
 
-export default MyProjectsPage;
+export default AllProjectsPage;

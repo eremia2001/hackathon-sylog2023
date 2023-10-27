@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
+  Card,
+  CardContent,
   Grid,
   IconButton,
   InputAdornment,
@@ -12,6 +14,7 @@ import {
   Autocomplete,
 } from "@mui/material";
 import {
+  AddCircleOutline as AddCircleOutlineIcon,
   AccountCircle,
   Image as ImageIcon,
   CloudUpload as CloudUploadIcon,
@@ -22,7 +25,7 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import postNewProject from "../api/postNewProject";
 
-function PopupFormCard({ isFormOpen, handleCloseForm }) {
+function PopupFormCard({ isFormOpen, handleCloseForm, setProjects, projects }) {
   // Constants
   const ngos = [{ label: "NGO 1" }, { label: "NGO 2" }];
   const today = dayjs();
@@ -31,7 +34,7 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
   const [projectOwner, setProjectOwner] = useState("");
   const [projectMembers, setProjectMembers] = useState(ngos);
   const [projectDescription, setProjectDescription] = useState("");
-  const [image, setImage] = useState([]);
+  const [droppedFiles, setDroppedFiles] = useState([]);
   const [startDate] = useState(today);
   const [endDate] = useState(today);
 
@@ -41,13 +44,13 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
   const handleFileDrop = (e) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
-    setImage(files);
+    setDroppedFiles(files);
   };
   const handleFileInputClick = () =>
     document.getElementById("fileInput").click();
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
-    setImage(files);
+    setDroppedFiles(files);
   };
   const handleSubmitForm = () => {
     let project = {
