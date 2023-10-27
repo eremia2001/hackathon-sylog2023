@@ -31,45 +31,16 @@ public class CrudTaskService {
         return taskRepository.findById(taskId).
                 orElseThrow(() -> new NotFoundException(String.format("Task with ID %s not found!", taskId)));
     }
-
-    public Task assignMember(Long memberId, Long taskId){
-        Task task = findById(taskId);
-        Project project = task.getProject();
+    public Set<Task> findTasksOfMember(Long memberId){
         Member member = crudMemberService.findById(memberId);
-
-        if(!project.getMembers().contains(member)) {
-            throw new NotFoundException(String.format("Member with ID %s is not part of the task's project you are trying to assign to!", memberId));
-        }
-
-        task.setAssignedMember(member);
-        return taskRepository.save(task);
+        return member.getAssignedTasks();
     }
 
-    public Set<Project> findProjectsOfMember(Long memberId){
-        Member member = crudMemberService.findById(memberId);
-        Organization member_org =  member.getOrganization();
-        return member_org.getProjects();
+    public Set<Task> getTasksByProjectId(Long projectId){
+        return taskRepository.findAllByProjectId(projectId);
     }
 
-    public Task updateState(Long taskId, String newStatus){
-        TaskState state = switch(newStatus) {
-            case "OPEN" -> TaskState.OPEN;
-            case "DONE" -> TaskState.DONE;
-            case "IN_PROGRESS" -> TaskState.IN_PROGRESS;
-            default -> null;
-        };
-        if(state != null){
-            Task task = taskRepository.findById(taskId).
-                    orElseThrow(() -> new NotFoundException("Project with ID " + taskId + " not found!"));
-            task.setState(state);
-            return taskRepository.save(task);
-        }
-        else{
-            throw new BadContentException("Invalid input");
-        }
-    }
-
-    public Task addTask(Task task){
+    public Task save(Task task){
         return taskRepository.save(task);
     }
 

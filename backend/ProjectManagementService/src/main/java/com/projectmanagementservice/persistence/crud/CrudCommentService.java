@@ -32,15 +32,7 @@ public class CrudCommentService {
         return commentRepository.findAllByProject(project);
     }
 
-    public Comment addCommentToTask(Long taskId, Comment comment){
-        Task task = crudTaskService.findById(taskId);
-        comment.setTask(task);
-        return commentRepository.save(comment);
-    }
-
-    public Comment addCommentToProject(Long projectId, Comment comment){
-        Project project = crudProjectService.findById(projectId);
-        comment.setProject(project);
+    public Comment save(Comment comment){
         return commentRepository.save(comment);
     }
 

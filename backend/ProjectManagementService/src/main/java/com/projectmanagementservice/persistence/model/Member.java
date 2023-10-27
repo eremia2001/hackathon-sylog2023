@@ -26,15 +26,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberRole role = MemberRole.MEMBER;
 
-    // todo password hash ?
-
     @ManyToOne
     @JoinColumn(name = "org_id")
     private Organization organization;
-
-    @ManyToMany
-    @JoinTable(name = "project_member", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "member_id"))
-    private Set<Project> projects = new HashSet<>();
 
     @OneToMany(mappedBy = "assignedMember", fetch = FetchType.LAZY)
     private Set<Task> assignedTasks;

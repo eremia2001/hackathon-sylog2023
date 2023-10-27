@@ -1,8 +1,7 @@
 package com.projectmanagementservice.persistence.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,8 +11,11 @@ import java.util.Set;
 
 @Entity
 @Table
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,25 +45,21 @@ public class Project {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Organization organization;
 
-    @ManyToMany(mappedBy = "projects")
-    private Set<Member> members = new HashSet<>();
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<Task> tasks = new HashSet<>();
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Task> tasks;
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private Set<ImageEntity> images = new HashSet<>();
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<ImageEntity> images;
-
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<DocumentEntity> documents;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments;
 
-    @ManyToMany(mappedBy = "projects")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Resource> resources = new HashSet<>();
 }

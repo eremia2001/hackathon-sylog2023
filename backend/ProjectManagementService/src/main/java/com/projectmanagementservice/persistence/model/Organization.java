@@ -32,11 +32,9 @@ public class Organization {
     @Column
     private String url;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Member> members;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Project> projects;
 }

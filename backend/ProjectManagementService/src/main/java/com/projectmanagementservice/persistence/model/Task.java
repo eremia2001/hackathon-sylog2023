@@ -35,8 +35,7 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @OneToMany(mappedBy = "task")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
     @ManyToOne
