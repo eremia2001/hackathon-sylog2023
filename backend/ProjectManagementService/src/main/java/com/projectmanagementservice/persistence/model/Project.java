@@ -38,6 +38,7 @@ public class Project {
 
     @Column
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private ProjectStatus status = ProjectStatus.UPCOMING;
 
     @ManyToOne

@@ -51,13 +51,15 @@ function PopupFormCard({ isFormOpen, handleCloseForm }) {
   };
   const handleSubmitForm = () => {
     let project = {
-      "title": projectName,
+      "name": projectName,
       "description": projectDescription,
-      "assignedPeople": projectMembers,
-      "ngo": projectOwner,
-      "image": image
+      "startDate": startDate.toDate(),
+      "endDate": endDate.toDate(),
+      "budget": 0,
+      "organizationId": projectOwner,
     }
-    postNewProject(project, "./data/test.json").then(r => console.log(r))
+    console.log(project)
+    postNewProject(project).then(r => console.log(r))
     handleCloseForm();
   };
 

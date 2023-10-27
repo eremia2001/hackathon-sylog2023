@@ -7,13 +7,19 @@ const ProjectView = () => {
     const [projects, setProjects] = useState([]);
     const [isFormOpen, setFormOpen] = useState(false);
     const [isMyProject, setMyProject] = useState(false)
+
     const handleCloseForm = () => setFormOpen(false);
 
+    const member = {
+        name: "Bernd",
+        ngo: "NGO 1"
+    }
+
     useEffect(() => {
-        console.log("hallo ich bin daten" + projects)
         getMyProjects().then(projects => {
             setProjects(projects)
         })
+
     }, [projects]);
 
     if (isMyProject) {
@@ -38,7 +44,7 @@ const ProjectView = () => {
                 }
                 {/* Hier wird das Grid mit 2 Spalten erstellt */}
                 {projects.map((project) => {
-                    if (project.ngo === "NGO 1") {
+                    if (project.ngo === member.ngo) {
                         return (<div key={project.title} className="mx-auto">
                             <ProjectItem project={project}/>
                         </div>)
