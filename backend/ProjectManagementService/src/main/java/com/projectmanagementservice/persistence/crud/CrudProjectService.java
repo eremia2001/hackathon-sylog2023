@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 import com.projectmanagementservice.api.model.ProjectDto;
 import com.projectmanagementservice.exception.NotFoundException;
@@ -13,22 +13,20 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.*;
 
-import static java.util.Objects.isNull;
-
 @Service
-public class ProjectService {
+public class CrudProjectService {
 
     @Autowired
     ProjectRepository projectRepository;
 
     @Autowired
-    MemberService memberService;
+    CrudMemberService crudMemberService;
 
     @Autowired
-    OrganizationService organizationService;
+    CrudOrganizationService crudOrganizationService;
 
     @Autowired
-    ImageService imageService;
+    CrudImageService crudImageService;
 
     public List<Project> findAll() {
         return projectRepository.findAll();
@@ -40,7 +38,7 @@ public class ProjectService {
     }
 
     public Set<Project> findProjectsOfMember(Long member_id) {
-        Member member = memberService.findById(member_id);
+        Member member = crudMemberService.findById(member_id);
         Organization memberOrg = member.getOrganization();
         return memberOrg.getProjects();
     }
@@ -49,7 +47,7 @@ public class ProjectService {
         Project project = new Project();
         project.setName(dto.getName());
 
-        Organization organization = organizationService.findById(dto.getOrganizationId());
+        Organization organization = crudOrganizationService.findById(dto.getOrganizationId());
         project.setOrganization(organization);
 
         project.setDescription(dto.getDescription());
@@ -61,7 +59,7 @@ public class ProjectService {
         if (dto.getMemberIds() != null) {
             dto.getMemberIds().forEach(mId -> {
 
-                Member m = memberService.findById(mId);
+                Member m = crudMemberService.findById(mId);
                 if (!project.getMembers().contains(m)) {
                     throw new NotFoundException(String.format("Member with ID %s you are trying to assign to project, is not part of the project's organization!", mId));
                 }
@@ -78,7 +76,7 @@ public class ProjectService {
                 imgEntity.setName(img.getName());
                 imgEntity.setImageBytes(img.getBytes());
                 imgEntity.setProject(project);
-                imageService.save(imgEntity);
+                crudImageService.save(imgEntity);
             });
         }
 

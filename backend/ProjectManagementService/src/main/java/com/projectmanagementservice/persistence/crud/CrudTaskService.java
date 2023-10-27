@@ -1,4 +1,4 @@
-package com.projectmanagementservice.persistence.service;
+package com.projectmanagementservice.persistence.crud;
 
 import com.projectmanagementservice.exception.BadContentException;
 import com.projectmanagementservice.exception.NotFoundException;
@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class TaskService {
+public class CrudTaskService {
 
     @Autowired
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectService projectService;
+    CrudProjectService crudProjectService;
 
     @Autowired
-    MemberService memberService;
+    CrudMemberService crudMemberService;
 
 
     public List<Task> findAll(){
@@ -35,7 +35,7 @@ public class TaskService {
     public Task assignMember(Long memberId, Long taskId){
         Task task = findById(taskId);
         Project project = task.getProject();
-        Member member = memberService.findById(memberId);
+        Member member = crudMemberService.findById(memberId);
 
         if(!project.getMembers().contains(member)) {
             throw new NotFoundException(String.format("Member with ID %s is not part of the task's project you are trying to assign to!", memberId));
@@ -46,7 +46,7 @@ public class TaskService {
     }
 
     public Set<Project> findProjectsOfMember(Long memberId){
-        Member member = memberService.findById(memberId);
+        Member member = crudMemberService.findById(memberId);
         Organization member_org =  member.getOrganization();
         return member_org.getProjects();
     }
